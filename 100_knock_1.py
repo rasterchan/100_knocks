@@ -106,3 +106,75 @@ x = 12
 y = '気温'
 z = 22.4
 print(format_string(x, y, z))
+
+#%%_08
+'''
+与えられた文字列の各文字を，以下の仕様で変換する関数cipherを実装せよ．
+英小文字ならば(219 - 文字コード)の文字に置換
+その他の文字はそのまま出力
+この関数を用い，英語のメッセージを暗号化・復号化せよ．
+'''
+
+def cipher(w):
+    if w.islower():
+        return ord(w)
+    else:
+        return w
+
+target = "I love you."
+ans = []
+for w in target:
+    ans.append(cipher(w))
+
+ans
+#%%_08*
+def cipher2(target):
+    result = ''
+    for c in target:
+        if c.islower():
+            result += chr(219 - ord(c))
+        else:
+            result += c
+    return result
+
+#%%_09
+'''
+スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，
+それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．
+ただし，長さが４以下の単語は並び替えないこととする．
+適当な英語の文（例えば"I couldn't believe that I could actually 
+understand what I was reading : the phenomenal power of the human mind ."）
+を与え，その実行結果を確認せよ．
+'''
+import random
+target = "I couldn't believe that I could actually\
+understand what I was reading : the phenomenal power of the human mind . "
+
+def typoglycemia(target):
+    target_list = []
+    target_list.append(target.split(' '))
+    ans_list = []
+    for w in target_list:
+        if len(w) > 3:
+            ans_list.append(w[0:1:]+ ''.join(random.sample(w[1:-1:],len(w)-2)) + w[-1::])
+        else:
+            ans_list.append(w)
+
+print(typoglycemia(target))
+# %%
+w = 'appsdkuhfosele'
+
+print(w[0:1:]+ ''.join(random.sample(w[1:-1:],len(w)-2)) + w[-1::])
+# %%
+import random
+def Typoglycemia(target):
+    result = []
+    for word in target.split(' '):
+        if len(word) <= 4:
+            result.append(word)
+        else:
+            chr_list = list(word[1:-1])
+            random.shuffle(chr_list)
+            result.append(word[0] + ''.join(chr_list) + word[-1])
+
+    return ' '.join(result)  
