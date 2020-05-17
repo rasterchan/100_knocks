@@ -6,6 +6,10 @@ with open(path) as f:
         count += 1
 print(count)
 
+#%%_10-2
+import pandas as pd
+
+
 #%%_11
 with open(path) as f:
     for l in f:
@@ -40,4 +44,22 @@ def head_return(path, n):
 
 print(head_return('merge.txt', 5))
 
-# %%
+# %%_14-2
+import sys
+import pandas as pd
+
+args = sys.argv
+path = args[1]
+N = args[2]
+
+def head_return(path, N):
+    with open(path) as f:
+        df = pd.read_table(f, index_col=0)
+        N = int(N)
+        return df.head(N)
+
+print(head_return(path, N))
+
+#%%_15　省略
+#%%_16
+
