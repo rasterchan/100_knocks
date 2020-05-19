@@ -8,12 +8,20 @@ print(count)
 
 #%%_10-2
 import pandas as pd
-
+path = 'popular-names.txt'
+with open(path) as f:
+    df = pd.read_table(f, header=None)
+    print(len(df))
 
 #%%_11
 with open(path) as f:
     for l in f:
         print(l.replace('\t', '　'))
+
+#%%11_2
+df = pd.read_table(path, sep='\t', header=None)
+df.to_csv('space.txt', sep=' ', header=None, index=False) 
+
 # %%_12
 #ex1
 import pandas as pd
@@ -60,6 +68,28 @@ def head_return(path, N):
 
 print(head_return(path, N))
 
-#%%_15　省略
+#%%_15　省
+
 #%%_16
+import sys
+import pandas as pd
+import math
+
+args = sys.argv
+#N = int(args[1])
+N = 3
+df = pd.read_table(path, sep='\t', header=None)
+nrow = math.ceil(len(df) / N)
+for i in range(N):
+    df.loc[nrow * i: nrow * (i + 1)].to_csv(f'sep_{i}.txt', sep = '\t', index = False)
+
+#なぜかinvalis syntaxになる
+#%%_17
+df = pd.read_table(path, sep='\t', header=None)
+namelist = df[0].unique()
+print(namelist, len(namelist))
+# %%_18
+print(df.sort_values(2, ascending=False))
+# %%_19
+df[0].value_counts()
 
